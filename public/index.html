@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: serif;
+      margin: 40px;
+      color: #111;
+      background-color: #ffffff;
+    }
+
+    .container {
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+
+    .profile-img {
+      width: 320px;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 30px;
+    }
+
+    .field-group {
+      margin-bottom: 15px;
+    }
+
+    .label {
+      font-size: 18px;
+    }
+
+    .value {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 15px 0 25px 0;
+    }
+
+    .edit-btn {
+      background-color: #e0e0e0;
+      color: #000;
+      border: 1px solid #aaa;
+      padding: 10px 24px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .edit-btn:hover {
+      background-color: #d0d0d0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>User Profile</h1>
+
+    <!-- Dog Profile Picture -->
+    <img 
+      src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&q=80" 
+      alt="User Avatar" 
+      class="profile-img"
+    />
+
+    <div class="field-group">
+      <span class="label">Name: </span>
+      <span class="value" id="userName">Anna Samson</span>
+    </div>
+    <hr>
+
+    <div class="field-group">
+      <span class="label">Email: </span>
+      <span class="value" id="userEmail">anna.samson@example.com</span>
+    </div>
+    <hr>
+
+    <div class="field-group">
+      <span class="label">Interests: </span>
+      <span class="value" id="userInterests">coding</span>
+    </div>
+    <hr>
+
+    <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
+  </div>
+
+  <script>
+    // Fetch user details from MongoDB backend on load
+    async function loadUserProfile() {
+      try {
+        const response = await fetch('/get-profile');
+        if (response.ok) {
+          const user = await response.json();
+          if (user.name) document.getElementById('userName').textContent = user.name;
+          if (user.email) document.getElementById('userEmail').textContent = user.email;
+          if (user.interests) document.getElementById('userInterests').textContent = user.interests;
+        }
+      } catch (err) {
+        console.log('Using default static values');
+      }
+    }
+
+    function editProfile() {
+      const name = prompt('Enter new Name:', document.getElementById('userName').textContent);
+      const email = prompt('Enter new Email:', document.getElementById('userEmail').textContent);
+      const interests = prompt('Enter new Interests:', document.getElementById('userInterests').textContent);
+
+      if (name && email) {
+        fetch('/update-profile', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, interests })
+        }).then(() => {
+          document.getElementById('userName').textContent = name;
+          document.getElementById('userEmail').textContent = email;
+          document.getElementById('userInterests').textContent = interests;
+        });
+      }
+    }
+
+    loadUserProfile();
+  </script>
+
+</body>
+</html>

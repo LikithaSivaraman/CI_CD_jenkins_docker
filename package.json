@@ -1,0 +1,13 @@
+{
+  "name": "node-mongo-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "mongodb": "^6.18.0",
+    "mongoose": "^9.9.2"
+  }
+}
