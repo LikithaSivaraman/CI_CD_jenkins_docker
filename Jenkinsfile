@@ -14,5 +14,13 @@ pipeline {
                 sh 'sudo dnf install -y docker'
             }
         }
+        stage("Docker service start and enable" ) {
+            steps {
+                echo "Starting the docker service.."
+                sh 'sudo systemctl enable docker'
+                sh 'sudo systemctl start docker'
+                sh 'sudo systemctl status docker'
+            }
+        }
     }    
 }
