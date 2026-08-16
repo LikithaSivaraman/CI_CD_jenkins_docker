@@ -42,12 +42,10 @@ services:
 volumes:
   myvolume:
 networks:
-  app-network:
-    name: app-network
-
+  app-network01:
+    name: app-network01
   mongodb-net:
     name: mongodb-net
-
   mongoexpnetwork:
     name: mongoexpnetwork
 
