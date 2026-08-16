@@ -51,6 +51,7 @@ pipeline {
                 sh 'docker connect app-network mongo'
                 sh 'docker connect app-network mongoexpress'
                 sh 'docker connect app-network nodeapp'
-       
+            }
+        }
     }    
 }
