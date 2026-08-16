@@ -37,6 +37,13 @@ pipeline {
                 
             }
         }
+        stage ("Running Node.js") {
+            steps{
+                sh 'docker build -t nodeapp .'
+                sh 'docker run -d -p 3000:3000 --name node_app --network app-network nodeapp'
+                
+            }
+        }
        
     }    
 }
