@@ -11,7 +11,7 @@ services:
     volumes:
       - myvolume:/data/db
     networks:
-      - mongodb-net
+      - app-network
 
   mongoexpress:
     image: mongo-express
@@ -26,7 +26,7 @@ services:
     depends_on:
       - mongo
     networks:
-      - mongoexpnetwork
+      - app-network
 
   nodeapp:
     build: .
@@ -42,11 +42,7 @@ services:
 volumes:
   myvolume:
 networks:
-  app-network01:
-    name: app-network01
-  mongodb-net:
-    name: mongodb-net
-  mongoexpnetwork:
-    name: mongoexpnetwork
-
+  app-network:
+    name: app-network
+  
 
