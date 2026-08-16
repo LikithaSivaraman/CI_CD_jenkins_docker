@@ -50,7 +50,7 @@ pipeline {
             steps {
                 sh 'docker network connect app-network mongo'
                 sh 'docker network connect app-network mongoexpress'
-                sh 'docker network connect app-network nodeapp'
+                sh 'docker network connect app-network node_app'
             }
         }
     }    
