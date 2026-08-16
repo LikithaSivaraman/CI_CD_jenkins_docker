@@ -20,8 +20,21 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongo
       - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
       - ME_CONFIG_MONGODB_ADMINPASSWORD=secretpassword
+      - ME_CONFIG_BASICAUTH= false
+     depends_on:
+      - mongo
     networks:
       - app-network
+
+  nodeapp:
+    build: .
+    container_name: node_app
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - mongo
 
 volumes:
   myvolume:
