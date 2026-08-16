@@ -22,9 +22,14 @@ pipeline {
                 sh 'sudo systemctl status docker'
             }
         }
+        stage ("Installing docker compose plugin") {
+            steps {
+                sh 'sudo dnf install -y docker-compose-plugin'
+            }
+        }
         stage ("Building the image and starting the containers") {
             steps {
-                sh 'docker compose up '
+                sh 'docker compose up'
             }
         }
     }    
