@@ -30,7 +30,6 @@ pipeline {
                 sh 'docker compose version'
             }
         }
->>>>>>> bbdaa220ce7f66192d3195f13fd9bbae80e1a1ac
         stage ("Building the image and starting the containers") {
             steps {
                 sh 'docker compose up'
