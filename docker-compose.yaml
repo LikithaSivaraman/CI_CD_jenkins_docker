@@ -43,5 +43,8 @@ volumes:
 
 networks:
   app-network:
+   name: app-network
   mongodb-net:
+   name: mongodb-net
   mongoexpnetwork:
+   name: mongoexpnetwork
