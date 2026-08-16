@@ -19,3 +19,6 @@ RUN -- execute commands once the container starts.
 EXPOSE -- make the container to listen on the specified port.
 CMD -- default arguments executed when container starts.
 ========================================================================================================================================
+Building the image using dockerfile:
+docker build -t image-name . -- building the image using dockerfile in the current directory.
+================================================================================================================================
