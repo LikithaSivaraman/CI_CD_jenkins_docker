@@ -24,7 +24,7 @@ pipeline {
         }
         stage ("Building the image and starting the containers") {
             steps {
-                sh 'docker compose up -d'
+                sh 'docker compose up '
             }
         }
     }    
