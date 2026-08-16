@@ -1,23 +1,30 @@
 services:
+
   mongo:
-     image: mongo
-     ports:
-       - 27017:27017
-     environment:
-       - MONGODB_INITDB_ROOT_USERNAME= admin
-       - MONGODB_INITDB_ROOT_PASSWORD= secretpassword
-     volumes:
-       - myvolume:/data/db
-     networks:
-       - app-network
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secretpassword
+    volumes:
+      - myvolume:/data/db
+    networks:
+      - app-network
+
   mongoexpress:
-      image: mongo-express
-      ports:
-       - 8081:8081
-      environment:
-       - ME_CONFIG_MONGODB_SERVER= mongo
-       - ME_CONFIG_MONGODB_ADMIN= admin
-       - ME_CONFIG_MONGODB_ADMINPASSWORD= secretpassword
-      networks:
-       - app-network
-  
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=secretpassword
+    networks:
+      - app-network
+
+volumes:
+  myvolume:
+
+networks:
+  app-network:
