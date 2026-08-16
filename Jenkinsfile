@@ -22,19 +22,21 @@ pipeline {
                 sh 'sudo systemctl status docker'
             }
         }
-        stage ("Installing docker compose plugin") {
+        stage ("Running MongoDB") {
             steps{
-                sh 'sudo mkdir -p /usr/libexec/docker/cli-plugins'
-                sh 'sudo curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-$(uname -m)" -o /usr/libexec/docker/cli-plugins/docker-compose'
-                sh 'sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose'
-                sh 'docker compose version'
+                sh 'docker pull mongo'
+                sh 'docker network create app-network'
+                sh 'docker run -d --name=mongo --network=app-network -v new-volume:/home/new-data/data/db -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin  -e MONGO_INITDB_ROOT_PASSWORD=secretpassword mongo:latest'
                 
             }
         }
-        stage ("Building the image and starting the containers") {
-            steps {
-                sh 'docker compose up'
+        stage ("Running MongoExpress") {
+            steps{
+                sh 'docker pull mongo-express'
+                sh 'docker run -d --name mongoexpress --network app-network -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=secretpassword -e ME_CONFIG_BASICAUTH=false -e ME_CONFIG_MONGODB_SERVER=mongo -p 8081:8081 mongo-express:latest'
+                
             }
         }
+       
     }    
 }
