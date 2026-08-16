@@ -28,6 +28,8 @@ pipeline {
                 sh 'sudo curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-$(uname -m)" -o /usr/libexec/docker/cli-plugins/docker-compose'
                 sh 'sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose'
                 sh 'docker compose version'
+                echo "Adding the jenkins user to the docker group"
+                sh 'sudo usermod -aG jenkins docker'
             }
         }
         stage ("Building the image and starting the containers") {
