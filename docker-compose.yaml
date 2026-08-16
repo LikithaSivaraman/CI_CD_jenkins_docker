@@ -1,13 +1,5 @@
 services:
 
-networks:
-  app-network:
-   name: app-network
-  mongodb-net:
-   name: mongodb-net
-  mongoexpnetwork:
-   name: mongoexpnetwork
-
   mongo:
     image: mongo
     container_name: mongo
@@ -36,8 +28,6 @@ networks:
     networks:
       - mongoexpnetwork
 
-    
-
   nodeapp:
     build: .
     container_name: node_app
@@ -48,7 +38,16 @@ networks:
     networks:
       - mongoexpnetwork
 
+networks:
+  app-network:
+    name: app-network
+
+  mongodb-net:
+    name: mongodb-net
+
+  mongoexpnetwork:
+    name: mongoexpnetwork
+
 volumes:
   myvolume:
-
 
