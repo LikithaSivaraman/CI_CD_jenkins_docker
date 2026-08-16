@@ -22,5 +22,10 @@ pipeline {
                 sh 'sudo systemctl status docker'
             }
         }
+        stage ("Building the image and starting the containers") {
+            steps {
+                sh 'docker-compose -f docker-compose.yaml up -d'
+            }
+        }
     }    
 }
