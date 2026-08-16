@@ -38,6 +38,9 @@ services:
     networks:
       - mongoexpnetwork
 
+
+volumes:
+  myvolume:
 networks:
   app-network:
     name: app-network
@@ -48,6 +51,4 @@ networks:
   mongoexpnetwork:
     name: mongoexpnetwork
 
-volumes:
-  myvolume:
 
