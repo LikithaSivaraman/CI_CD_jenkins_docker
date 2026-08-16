@@ -14,7 +14,7 @@ pipeline {
                 sh 'sudo dnf install -y docker'
             }
         }
-        stage("Docker service start and enable" ) {
+        stage("Docker start and enable service.." ) {
             steps {
                 echo "Starting the docker service.."
                 sh 'sudo systemctl enable docker'
