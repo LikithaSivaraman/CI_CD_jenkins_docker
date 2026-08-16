@@ -24,13 +24,22 @@ pipeline {
         }
         stage ("Installing docker compose plugin") {
             steps {
+<<<<<<< HEAD
                 sh 'sudo dnf install -y docker-compose-plugin'
             }
         }
        
+=======
+                sh 'sudo mkdir -p /usr/libexec/docker/cli-plugins'
+                sh 'sudo curl -SL "https://github.com/docker/compose/releases/latest/download/docker-compose-linux-$(uname -m)" -o /usr/libexec/docker/cli-plugins/docker-compose'
+                sh 'sudo chmod +x /usr/libexec/docker/cli-plugins/docker-compose'
+                sh 'docker compose version'
+            }
+        }
+>>>>>>> bbdaa220ce7f66192d3195f13fd9bbae80e1a1ac
         stage ("Building the image and starting the containers") {
             steps {
-                sh 'docker compose -f docker-compose.yaml up -d'
+                sh 'docker compose up'
             }
         }
     }    
